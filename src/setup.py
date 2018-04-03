@@ -8,7 +8,7 @@ except ImportError:
 
 dist = setup(
     name='im_futuregcscompose',
-    version='0.1.0',
+    version='0.1.1',
     description='function for composing an folder full of text files, into one text file, in gcs, for Google App Engine, Python standard environment',
     author='Emlyn O\'Regan',
     author_email='emlynoregan@gmail.com',

@@ -1,4 +1,3 @@
-from google.cloud import storage  #@UnresolvedImport
 from im_future import future, GenerateOnAllChildSuccess, FutureReadyForResult
 from im_util import logdebug, logexception, GenerateStableId
 
@@ -80,12 +79,14 @@ def futuregcscompose(gcsbucket=None, gcssourceprefix=None, gcstargetprefix=None,
 
 
 def listbucket(gcsbucket, gcsprefix):
+    from google.cloud import storage  #@UnresolvedImport
     lgcsclient = storage.Client()
     bucket = lgcsclient.get_bucket(gcsbucket)
     return bucket.list_blobs(prefix = gcsprefix)
 
 
 def getblobsbyname(gcsbucket, *blobnames):
+    from google.cloud import storage  #@UnresolvedImport
     lgcsclient = storage.Client()
     bucket = lgcsclient.get_bucket(gcsbucket)
     retval = [bucket.get_blob(blobname) for blobname in blobnames]
@@ -93,11 +94,13 @@ def getblobsbyname(gcsbucket, *blobnames):
     return retval
 
 def deleteblobs(gcsbucket, blobs):
+    from google.cloud import storage  #@UnresolvedImport
     lgcsclient = storage.Client()
     bucket = lgcsclient.get_bucket(gcsbucket)
     bucket.delete_blobs(blobs)
     
 def copyblob(gcsbucket, oldblob, newblobname):
+    from google.cloud import storage  #@UnresolvedImport
     lgcsclient = storage.Client()
     bucket = lgcsclient.get_bucket(gcsbucket)
     newblob = bucket.blob(newblobname)
@@ -107,6 +110,7 @@ def copyblob(gcsbucket, oldblob, newblobname):
     newblob.upload_from_string(oldblobbuffer)
 
 def composeblobs(gcsbucket, newblobname, blobs):
+    from google.cloud import storage  #@UnresolvedImport
     lgcsclient = storage.Client()
     bucket = lgcsclient.get_bucket(gcsbucket)
     ltotalcomponent_count = sum([blob.component_count for blob in blobs if blob and blob.component_count])
